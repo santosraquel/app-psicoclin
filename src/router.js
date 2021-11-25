@@ -5,7 +5,9 @@ import { Feather} from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 
 import Home from './pages/Home';
-import Consultations from './pages/Consultations';
+import Consultations from './pages/Consultations/consultations';
+import newConsultations from './pages/NewConsultation/newConsultation';
+
 
 const Stack = createStackNavigator();
 
@@ -18,6 +20,24 @@ function Routes(){
                     component={Home} 
                     options={{
                         title: 'Início',
+                        headerTintColor:"#0066FF",
+                        headerRight: () => (
+                            <TouchableOpacity style={{marginRight: 15}}>
+                                <Feather
+                                    name="plus-square"
+                                    size={24}
+                                    color="#0066FF"
+                                />
+                            </TouchableOpacity>
+                        )
+                    }}
+                />
+                <Stack.Screen 
+                    name="consultations" 
+                    component={Consultations} 
+                    options={{
+                        title: 'Minhas Consultas',
+                        headerTintColor:"#0066FF",
                         headerRight: () => (
                             <TouchableOpacity style={{marginRight: 15}}>
                                 <Feather
@@ -31,10 +51,11 @@ function Routes(){
                     }}
                 />
                 <Stack.Screen 
-                    name="consultations" 
-                    component={Consultations} 
+                    name="newConsultations" 
+                    component={newConsultations} 
                     options={{
-                        title: 'Minhas Consultas',
+                        title: 'Nova Consulta',
+                        headerTintColor:"#0066FF",
                         headerRight: () => (
                             <TouchableOpacity style={{marginRight: 15}}>
                                 <Feather
