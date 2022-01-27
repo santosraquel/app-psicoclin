@@ -16,6 +16,10 @@ import { FontAwesome} from "@expo/vector-icons"
 function Consultations({ navigation }){
     const [consultations, setConsultations] = useState([]);
 
+    function deleteConsultations(id){
+        database.collection("Consultations").doc(id).delete()
+    }
+
     useEffect(() => {
         database.collections("consultations").onSnapshot((query) =>{
             const list = [];
@@ -32,7 +36,35 @@ function Consultations({ navigation }){
                 showsVerticalScrollIndicator={false}
                 data={consultation}
                 renderItem={(item) => {
-                      b 
+                    return(
+                      <View style={styles.Consultations}>
+                           <TouchableOpacity 
+                                style={styles.deleteConsultation}
+                                onPress={() => {
+                                    deleteConsultations(item.id)
+                                }}
+                            >
+                                <FontAwesome
+                                    name="fa-circle-minus"
+                                    size={23}
+                                    color="#F92e6"
+                                >
+                                    
+                                </FontAwesome>
+                            </TouchableOpacity>
+                            <Text
+                                style={styles.DescriptionConsultation}
+                                onPress={() => 
+                                    navigation.navigate("Details", {
+                                        id: item.id,
+                                        description: item.description
+                                    })
+                                }
+                            >
+                                {item.description}
+                            </Text>
+                      </View>
+                    )
                 }}
             />
             <TouchableOpacity 
